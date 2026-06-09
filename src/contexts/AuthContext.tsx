@@ -49,8 +49,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         systemUsers = [{
           id: 'root-admin-001',
           name: 'Administrador Master',
-          email: 'admin@admin.com',
-          password: 'admin', // Default password for root
+          email: 'jorge@gmail.com',
+          password: 'jorginho123', // Default password for root
           role: 'admin',
           status: 'ativo',
           plan: 'vip',
