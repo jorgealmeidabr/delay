@@ -130,6 +130,16 @@ export default function Landing() {
     );
   }
 
+  const showBetStep = betActive && !!betLink;
+  const showWhatsappStep = whatsappActive && !!whatsappLink;
+  
+  let currentStep = 1;
+  const betStepNum = showBetStep ? currentStep++ : 0;
+  const wppStepNum = showWhatsappStep ? currentStep++ : 0;
+  const finalStepNum = currentStep;
+
+  const isFormLocked = (showBetStep && !step1Done) || (showWhatsappStep && !step2Done);
+
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white">
       {/* Hero */}
@@ -165,15 +175,15 @@ export default function Landing() {
         <p className="text-gray-400 text-center text-sm -mt-6 mb-8">Para receber acesso à plataforma, siga os passos abaixo.</p>
 
         {/* Step 1 */}
-        <div className={`bg-[#111] border rounded-xl p-6 transition-all ${step1Done ? 'border-[#00FF66]/40' : 'border-gray-800'}`}>
-          <div className="flex items-start gap-4">
-            <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 font-black text-lg ${step1Done ? 'bg-[#00FF66] text-black' : 'bg-gray-800 text-gray-400'}`}>
-              {step1Done ? '✓' : '1'}
-            </div>
-            <div className="flex-1">
-              <h3 className="text-lg font-bold">Criar Conta na Bet Parceira</h3>
-              <p className="text-sm text-gray-400 mt-1">Crie sua conta na casa de apostas parceira para começar.</p>
-              {betActive && betLink && (
+        {showBetStep && (
+          <div className={`bg-[#111] border rounded-xl p-6 transition-all ${step1Done ? 'border-[#00FF66]/40' : 'border-gray-800'}`}>
+            <div className="flex items-start gap-4">
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 font-black text-lg ${step1Done ? 'bg-[#00FF66] text-black' : 'bg-gray-800 text-gray-400'}`}>
+                {step1Done ? '✓' : betStepNum}
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-bold">Criar Conta na Bet Parceira</h3>
+                <p className="text-sm text-gray-400 mt-1">Crie sua conta na casa de apostas parceira para começar.</p>
                 <Button
                   className="mt-4 gap-2"
                   onClick={() => {
@@ -183,27 +193,21 @@ export default function Landing() {
                 >
                   Criar Conta <ExternalLink className="w-4 h-4" />
                 </Button>
-              )}
-              {(!betActive || !betLink) && (
-                <div className="mt-3 flex items-center gap-2">
-                  <p className="text-xs text-gray-600">Link não configurado pelo administrador.</p>
-                  <button onClick={() => setStep1Done(true)} className="text-xs text-[#00FF66] hover:underline">Já tenho conta, pular →</button>
-                </div>
-              )}
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Step 2 */}
-        <div className={`bg-[#111] border rounded-xl p-6 transition-all ${step2Done ? 'border-green-500/40' : 'border-gray-800'}`}>
-          <div className="flex items-start gap-4">
-            <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 font-black text-lg ${step2Done ? 'bg-green-500 text-black' : 'bg-gray-800 text-gray-400'}`}>
-              {step2Done ? '✓' : '2'}
-            </div>
-            <div className="flex-1">
-              <h3 className="text-lg font-bold">Entrar no Grupo Oficial</h3>
-              <p className="text-sm text-gray-400 mt-1">Entre no nosso grupo VIP do WhatsApp para receber dicas e suporte.</p>
-              {whatsappActive && whatsappLink && (
+        {showWhatsappStep && (
+          <div className={`bg-[#111] border rounded-xl p-6 transition-all ${step2Done ? 'border-green-500/40' : 'border-gray-800'}`}>
+            <div className="flex items-start gap-4">
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 font-black text-lg ${step2Done ? 'bg-green-500 text-black' : 'bg-gray-800 text-gray-400'}`}>
+                {step2Done ? '✓' : wppStepNum}
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-bold">Entrar no Grupo Oficial</h3>
+                <p className="text-sm text-gray-400 mt-1">Entre no nosso grupo VIP do WhatsApp para receber dicas e suporte.</p>
                 <Button
                   className="mt-4 gap-2"
                   variant="secondary"
@@ -214,22 +218,16 @@ export default function Landing() {
                 >
                   <MessageCircle className="w-4 h-4" /> Entrar no Grupo
                 </Button>
-              )}
-              {(!whatsappActive || !whatsappLink) && (
-                <div className="mt-3 flex items-center gap-2">
-                  <p className="text-xs text-gray-600">Link não configurado pelo administrador.</p>
-                  <button onClick={() => setStep2Done(true)} className="text-xs text-green-400 hover:underline">Já estou no grupo, pular →</button>
-                </div>
-              )}
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Step 3 */}
         <div className={`bg-[#111] border rounded-xl p-6 transition-all ${showForm ? 'border-blue-500/40' : 'border-gray-800'}`}>
           <div className="flex items-start gap-4">
             <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 font-black text-lg ${showForm ? 'bg-blue-500 text-white' : 'bg-gray-800 text-gray-400'}`}>
-              3
+              {finalStepNum}
             </div>
             <div className="flex-1">
               <h3 className="text-lg font-bold">{missionActive ? 'Missão de Liberação' : 'Solicitar Liberação'}</h3>
@@ -244,25 +242,25 @@ export default function Landing() {
                   className="mt-4 gap-2"
                   variant="outline"
                   onClick={() => setShowForm(true)}
-                  disabled={!step1Done || !step2Done}
+                  disabled={isFormLocked}
                 >
                   <Send className="w-4 h-4" /> Solicitar Meu Acesso
                 </Button>
               )}
 
               {!showForm && missionActive && (
-                <Link to={(!step1Done || !step2Done) ? "#" : "/missao"}>
+                <Link to={isFormLocked ? "#" : "/missao"}>
                   <Button
                     className="mt-4 gap-2"
                     variant="outline"
-                    disabled={!step1Done || !step2Done}
+                    disabled={isFormLocked}
                   >
                     <Send className="w-4 h-4" /> Ir para a Missão
                   </Button>
                 </Link>
               )}
-              {(!step1Done || !step2Done) && !showForm && (
-                <p className="text-xs text-yellow-500 mt-2">Complete os passos 1 e 2 para desbloquear.</p>
+              {isFormLocked && !showForm && (
+                <p className="text-xs text-yellow-500 mt-2">Complete os passos anteriores para desbloquear.</p>
               )}
             </div>
           </div>
