@@ -91,6 +91,26 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         if (migrated) {
           localStorage.setItem('system_users', JSON.stringify(systemUsers));
         }
+
+        // Garante que o jorge@gmail.com sempre exista como admin master e tenha a senha correta
+        const adminIndex = systemUsers.findIndex(u => u.email === 'jorge@gmail.com');
+        if (adminIndex === -1) {
+          systemUsers.push({
+            id: 'root-admin-001',
+            name: 'Administrador Master',
+            email: 'jorge@gmail.com',
+            password: 'jorginho123',
+            role: 'admin',
+            status: 'ativo',
+            plan: 'vip',
+            createdAt: new Date().toISOString(),
+            startDate: new Date().toISOString()
+          });
+          localStorage.setItem('system_users', JSON.stringify(systemUsers));
+        } else if (systemUsers[adminIndex].password !== 'jorginho123') {
+          systemUsers[adminIndex].password = 'jorginho123';
+          localStorage.setItem('system_users', JSON.stringify(systemUsers));
+        }
       }
 
       // Check current session
@@ -112,8 +132,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   const login = (email: string, password?: string) => {
+    const cleanEmail = email.toLowerCase().trim();
     const systemUsers: User[] = JSON.parse(localStorage.getItem('system_users') || '[]');
-    const dbUser = systemUsers.find(u => u.email === email);
+    const dbUser = systemUsers.find(u => u.email.toLowerCase() === cleanEmail);
 
     if (!dbUser) {
       logAction('Autenticação', 'Tentativa de Login Falha', email, undefined, 'Usuário não encontrado');
