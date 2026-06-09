@@ -1,6 +1,6 @@
 {
-  "name": "DelayRadar",
-  "short_name": "DelayRadar",
+  "name": "DelayAPI",
+  "short_name": "DelayAPI",
   "description": "Sincronize sua transmissão com o tempo real.",
   "start_url": "/",
   "display": "standalone",

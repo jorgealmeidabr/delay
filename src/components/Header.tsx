@@ -61,7 +61,7 @@ export default function Header() {
         <Link to={user ? '/jogos' : '/'} className="flex items-center gap-2 group flex-shrink-0">
           <Radar className="w-7 h-7 text-[#00FF66] transition-transform group-hover:rotate-12" />
           <span className="font-black text-lg tracking-tight text-white">
-            Delay<span className="text-[#00FF66]">Radar</span>
+            Delay<span className="text-[#00FF66]">API</span>
           </span>
         </Link>
 

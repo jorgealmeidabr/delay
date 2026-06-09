@@ -31,7 +31,7 @@ export default function Login() {
       <div className="max-w-md w-full space-y-8 bg-[#111] p-8 rounded-2xl border border-gray-800">
         <div className="flex flex-col items-center">
           <Radar className="w-12 h-12 text-[#00FF66]" />
-          <h2 className="mt-6 text-3xl font-extrabold text-white">Delay<span className="text-[#00FF66]">Radar</span></h2>
+          <h2 className="mt-6 text-3xl font-extrabold text-white">Delay<span className="text-[#00FF66]">API</span></h2>
           <p className="mt-2 text-sm text-gray-400">Acesso Restrito</p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleLogin}>

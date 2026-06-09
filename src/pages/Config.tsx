@@ -22,7 +22,7 @@ export default function ConfigPage() {
   const [whatsappActive, setWhatsappActive] = useState(true);
   const [systemLink, setSystemLink] = useState('');
   const [msgTemplate, setMsgTemplate] = useState(
-    `Olá {nome},\n\nSeu acesso ao DelayRadar foi aprovado! 🎉\n\nLogin: {email}\nSenha: {senha}\n\nAcesse agora:\n{link_sistema}\n\nNo primeiro acesso você deverá criar uma senha pessoal.\n\nBoas análises! ⚽`
+    `Olá {nome},\n\nSeu acesso ao DelayAPI foi aprovado! 🎉\n\nLogin: {email}\nSenha: {senha}\n\nAcesse agora:\n{link_sistema}\n\nNo primeiro acesso você deverá criar uma senha pessoal.\n\nBoas análises! ⚽`
   );
 
   useEffect(() => {
@@ -222,7 +222,7 @@ export default function ConfigPage() {
                 type="url"
                 value={systemLink}
                 onChange={e => setSystemLink(e.target.value)}
-                placeholder="https://delayradar.com"
+                placeholder="https://delayapi.com"
                 className="flex-1 bg-[#1A1A1A] border border-gray-700 rounded-lg p-2.5 text-white outline-none focus:border-blue-400 text-sm"
               />
               <Button onClick={() => handleSaveField('funnel_system_link', systemLink, 'Link do Sistema')} variant="outline" className="text-blue-400 border-blue-400/50 hover:bg-blue-400/10">

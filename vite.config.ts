@@ -8,8 +8,8 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: 'DelayRadar',
-        short_name: 'DelayRadar',
+        name: 'DelayAPI',
+        short_name: 'DelayAPI',
         description: 'Encontre o delay da sua transmissão ao vivo',
         theme_color: '#0a0a0f',
         background_color: '#0a0a0f',

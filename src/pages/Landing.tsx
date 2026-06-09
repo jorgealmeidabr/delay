@@ -153,7 +153,7 @@ export default function Landing() {
               </div>
             </div>
             <h1 className="text-4xl md:text-5xl font-black">
-              Delay<span className="text-[#00FF66]">Radar</span>
+              Delay<span className="text-[#00FF66]">API</span>
             </h1>
             <p className="text-gray-400 text-lg max-w-lg mx-auto leading-relaxed">
               Análise avançada de transmissões esportivas ao vivo com inteligência artificial.

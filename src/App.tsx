@@ -27,7 +27,7 @@ import GlobalAnnouncements from './components/GlobalAnnouncements';
 const App = () => (
   <HelmetProvider>
     <Helmet>
-      <title>DelayRadar</title>
+      <title>DelayAPI</title>
       <meta name="description" content="Encontre o delay da sua transmissão ao vivo" />
     </Helmet>
     <BrowserRouter>
