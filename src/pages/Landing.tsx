@@ -4,6 +4,7 @@ import { Radar, ExternalLink, MessageCircle, Send, CheckCircle, Upload, User, Ma
 import { Button } from '../components/ui/Button';
 import { logAction } from '../lib/audit';
 import { UserOrigin } from '../contexts/AuthContext';
+import { getMissionConfig } from '../lib/invites';
 
 export interface AccessRequest {
   id: string;
@@ -28,6 +29,7 @@ export default function Landing() {
   const [step2Done, setStep2Done] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [missionActive, setMissionActive] = useState(false);
 
   // Form state
   const [nome, setNome] = useState('');
@@ -53,6 +55,7 @@ export default function Landing() {
     setBetActive(localStorage.getItem('funnel_bet_active') !== 'false');
     setWhatsappLink(localStorage.getItem('funnel_whatsapp_link') || '');
     setWhatsappActive(localStorage.getItem('funnel_whatsapp_active') !== 'false');
+    setMissionActive(getMissionConfig().active);
   }, []);
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -229,10 +232,14 @@ export default function Landing() {
               3
             </div>
             <div className="flex-1">
-              <h3 className="text-lg font-bold">Solicitar Liberação</h3>
-              <p className="text-sm text-gray-400 mt-1">Preencha o formulário abaixo para que um administrador analise sua solicitação.</p>
+              <h3 className="text-lg font-bold">{missionActive ? 'Missão de Liberação' : 'Solicitar Liberação'}</h3>
+              <p className="text-sm text-gray-400 mt-1">
+                {missionActive 
+                  ? 'Para liberar o acesso, você precisa concluir a missão de convites.'
+                  : 'Preencha o formulário abaixo para que um administrador analise sua solicitação.'}
+              </p>
 
-              {!showForm && (
+              {!showForm && !missionActive && (
                 <Button
                   className="mt-4 gap-2"
                   variant="outline"
@@ -242,13 +249,25 @@ export default function Landing() {
                   <Send className="w-4 h-4" /> Solicitar Meu Acesso
                 </Button>
               )}
+
+              {!showForm && missionActive && (
+                <Link to={(!step1Done || !step2Done) ? "#" : "/missao"}>
+                  <Button
+                    className="mt-4 gap-2"
+                    variant="outline"
+                    disabled={!step1Done || !step2Done}
+                  >
+                    <Send className="w-4 h-4" /> Ir para a Missão
+                  </Button>
+                </Link>
+              )}
               {(!step1Done || !step2Done) && !showForm && (
                 <p className="text-xs text-yellow-500 mt-2">Complete os passos 1 e 2 para desbloquear.</p>
               )}
             </div>
           </div>
 
-          {showForm && (
+          {showForm && !missionActive && (
             <div className="mt-6 pt-6 border-t border-gray-800 space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
