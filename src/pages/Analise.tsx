@@ -34,7 +34,7 @@ export default function AnalisePage() {
 
     // 1. Tenta análise real via Gemini + Google Search
     const geminiResult = await searchLiveStreams(name);
-    logAction('Análise', 'Busca de Transmissão', name, undefined, geminiResult.success ? 'Sucesso via Gemini' : 'Fallback local');
+    logAction('Análise', 'Busca de Transmissão', name, undefined, geminiResult.success ? 'Sucesso via IA' : 'Fallback local');
 
     if (geminiResult.success && geminiResult.data) {
       setResult(geminiResult);
@@ -44,7 +44,7 @@ export default function AnalisePage() {
     }
 
     // 2. Fallback: motor heurístico local
-    console.warn('Gemini indisponível. Usando motor local.', geminiResult.error);
+    console.warn('IA indisponível. Usando motor local.', geminiResult.error);
     const localResult = await getOfflineTransmissions(name);
     setResult({ ...localResult, geminiError: geminiResult.error });
     setDataSource('local');
@@ -92,7 +92,7 @@ export default function AnalisePage() {
               : 'bg-yellow-500/10 border-yellow-500/30 text-yellow-400'
           }`}>
             {dataSource === 'gemini' ? (
-              <>✨ Análise em tempo real via Gemini + Google Search</>
+              <>✨ Análise em tempo real via IA + Google Search</>
             ) : (
               <>
                 <AlertTriangle className="w-4 h-4 flex-shrink-0" />

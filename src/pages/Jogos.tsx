@@ -85,7 +85,7 @@ export default function JogosPage() {
             <Trophy className="text-[#00FF66] w-8 h-8" />
             Radar Global
             <span className="ml-2 text-[10px] font-bold bg-purple-500/20 text-purple-400 px-2 py-0.5 rounded-full border border-purple-500/30 uppercase tracking-widest flex items-center gap-1">
-              ✨ Gemini AI
+              ✨ IA
             </span>
           </h1>
           <Button onClick={fetchMatches} variant="outline" className="text-gray-400 hover:text-white border-gray-700">
@@ -126,7 +126,7 @@ export default function JogosPage() {
         ) : flatSortedMatches.length === 0 ? (
           <div className="text-center py-20 border border-gray-800 rounded-xl bg-[#111] mt-4">
             <h2 className="text-xl font-bold mb-2">Nenhum evento encontrado</h2>
-            <p className="text-gray-400">O Gemini não encontrou partidas de {sportTab} agendadas para hoje ou próximas 24h.</p>
+            <p className="text-gray-400">Não foram encontradas partidas de {sportTab} agendadas para hoje ou próximas 24h.</p>
           </div>
         ) : (
           <div className="space-y-8 mt-4">

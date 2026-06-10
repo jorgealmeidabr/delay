@@ -86,7 +86,7 @@ export default function ResultsPanel({ isLoading, error, data, gameName, onNewSe
         </div>
         <div>
           <h3 className="text-xl font-bold text-white mb-2">Varrendo a internet...</h3>
-          <p className="text-gray-400 max-w-sm">O Gemini está analisando plataformas, fóruns e chats para encontrar a transmissão com menor delay para {gameName}.</p>
+          <p className="text-gray-400 max-w-sm">Nossa IA está analisando plataformas, fóruns e chats para encontrar a transmissão com menor delay para {gameName}.</p>
         </div>
       </div>
     );
@@ -111,7 +111,7 @@ export default function ResultsPanel({ isLoading, error, data, gameName, onNewSe
         <Radar className="w-12 h-12 text-gray-600 mb-4" />
         <h3 className="text-xl font-bold text-white mb-2">Nenhuma transmissão encontrada</h3>
         <p className="text-gray-400 mb-6 max-w-md">
-          A pesquisa do Gemini não retornou nenhum link ao vivo no momento para {gameName}.
+          A pesquisa não retornou nenhum link ao vivo no momento para {gameName}.
         </p>
         <Button onClick={onNewSearch}>Nova busca</Button>
       </div>
